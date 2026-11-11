@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cut">
+<title>배당으로 은퇴하기 프로젝트 · 자료실</title>
+<meta name="description" content="영상에서 소개한 가이드·기록표 앱·배당 은퇴 계산기를 한곳에 모았습니다.">
+<meta property="og:title" content="배당으로 은퇴하기 프로젝트 · 자료실">
+<meta property="og:description" content="영상에서 소개한 가이드·기록표 앱·배당 은퇴 계산기를 한곳에 모았습니다.">
+<meta property="og:image" content="img/story2_long.jpg">
+<meta name="theme-color" content="#F7F5FB">
+<link rel="icon" href="img/icon-log.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&family=Noto+Sans+KR:wght@400;500;700;900&display=swap">
+<style>
+/* 색·글꼴은 기록표 앱(gaesu-log)과 같게 맞춤. 밝은 바탕만 */
+:root{
+  --bg:#F7F5FB;--wash1:#FBEBF3;--wash2:#F2EFFD;--card:#FFFFFF;--ink:#15151C;--muted:#636575;--line:#E4E2EE;
+  --accent:#1F4FF5;--on-accent:#FFFFFF;--accent-soft:#E8EDFF;--coral:#D93A40;--coral-soft:#FDECEC;
+  --good:#0E7A52;--good-soft:#E3F5EC;--warn-soft:#FFF4D6;--warn:#8A5A00;
+  --shadow:0 4px 14px rgba(60,40,120,.08);
+  --f-hand:"Nanum Pen Script","Noto Sans KR",cursive;
+  --f-body:"Noto Sans KR","Apple SD Gothic Neo","Malgun Gothic",sans-serif;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg);background-image:radial-gradient(900px 420px at 0% -10%,var(--wash1),transparent 60%),radial-gradient(800px 420px at 100% 0%,var(--wash2),transparent 60%);
+  color:var(--ink);font-family:var(--f-body);line-height:1.55;word-break:keep-all;-webkit-font-smoothing:antialiased;min-height:100vh}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:520px;margin:0 auto;padding:28px 16px 48px}
+
+/* 머리말 */
+.hero{text-align:center;padding:8px 4px 18px}
+.avatar{width:76px;height:76px;border-radius:50%;margin:0 auto 12px;display:grid;place-items:center;background:var(--accent);color:var(--on-accent);
+  font-family:var(--f-hand);font-size:34px;box-shadow:var(--shadow)}
+.hero h1{font-size:22px;font-weight:900;margin:0 0 6px;letter-spacing:-.3px}
+.hero p{margin:0;color:var(--muted);font-size:14.5px}
+.social{display:flex;gap:8px;justify-content:center;margin-top:14px;flex-wrap:wrap}
+.social a{display:inline-flex;align-items:center;gap:6px;padding:8px 14px;border-radius:999px;background:var(--card);border:1px solid var(--line);font-size:14px;font-weight:700;box-shadow:var(--shadow)}
+.social svg{width:18px;height:18px}
+
+/* 인스타 안내 */
+.inapp{display:none;margin:4px 0 16px;padding:12px 14px;border-radius:14px;background:var(--warn-soft);color:var(--warn);font-size:13.5px}
+.inapp.on{display:block}
+
+/* 카드 */
+.sec-title{display:flex;align-items:center;gap:8px;font-size:15px;font-weight:900;margin:22px 4px 10px}
+.sec-title .pin{font-size:12px;font-weight:700;color:var(--coral);background:var(--coral-soft);padding:3px 9px;border-radius:999px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:20px;box-shadow:var(--shadow);overflow:hidden}
+.thumb{display:block;width:100%;aspect-ratio:16/9;object-fit:cover;background:var(--wash2)}
+.card .body{padding:16px}
+.card h2{font-size:18px;font-weight:900;margin:0 0 4px;letter-spacing:-.2px}
+.card .sub{color:var(--muted);font-size:13.5px;margin:0 0 14px}
+
+/* 1·2·3단계 버튼 */
+.steps{display:flex;flex-direction:column;gap:10px}
+.step{display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:16px;border:1.5px solid var(--line);background:var(--card);transition:transform .12s ease,border-color .12s ease}
+.step:active{transform:scale(.985)}
+.step:hover{border-color:var(--accent)}
+.step .num{flex:none;width:30px;height:30px;border-radius:50%;display:grid;place-items:center;font-weight:900;font-size:14px;background:var(--accent-soft);color:var(--accent)}
+.step .ic{flex:none;width:40px;height:40px;border-radius:11px;object-fit:cover}
+.step .ic.doc{display:grid;place-items:center;background:var(--wash1);font-size:20px}
+.step .txt{flex:1;min-width:0}
+.step b{display:block;font-size:15.5px;font-weight:900}
+.step span{display:block;font-size:12.5px;color:var(--muted)}
+.step .go{flex:none;color:var(--accent);font-weight:900;font-size:18px}
+.step.main{background:var(--accent);border-color:var(--accent);color:var(--on-accent)}
+.step.main .num{background:rgba(255,255,255,.22);color:#fff}
+.step.main span{color:rgba(255,255,255,.85)}
+.step.main .go{color:#fff}
+.extra{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:12px;font-size:13px;color:var(--muted);flex-wrap:wrap}
+.extra a{color:var(--accent);font-weight:700;text-decoration:underline;text-underline-offset:3px}
+
+/* 지난 자료 */
+.list{display:flex;flex-direction:column;gap:10px}
+.item{display:flex;gap:12px;align-items:center;padding:10px;border-radius:16px;background:var(--card);border:1px solid var(--line)}
+.item img{flex:none;width:104px;aspect-ratio:16/9;border-radius:10px;object-fit:cover}
+.item b{display:block;font-size:14.5px;font-weight:900;line-height:1.35}
+.item .links{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px}
+.item .links a{font-size:12px;font-weight:700;padding:4px 9px;border-radius:999px;background:var(--accent-soft);color:var(--accent)}
+.soon{padding:14px;border-radius:16px;border:1.5px dashed var(--line);color:var(--muted);font-size:13.5px;text-align:center;font-family:var(--f-hand);font-size:22px}
+
+.foot{margin-top:28px;color:var(--muted);font-size:12px;text-align:center;line-height:1.6}
+</style>
+</head>
+<body>
+<main class="wrap">
+
+  <!-- ① 머리말 -->
+  <header class="hero">
+    <div class="avatar" aria-hidden="true">배당</div>
+    <h1>배당으로 은퇴하기 프로젝트</h1>
+    <p>자산 40억까지 갔다가 거의 다 잃어 본 경험으로,<br>배당으로 은퇴하는 길을 기록합니다.</p>
+    <nav class="social" aria-label="채널">
+      <!-- 유튜브 @ipe_life · 인스타 @invest_play_eat -->
+      <a href="https://www.youtube.com/@ipe_life" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#FF0000" d="M23 7.2a3 3 0 0 0-2.1-2.1C19 4.6 12 4.6 12 4.6s-7 0-8.9.5A3 3 0 0 0 1 7.2 31 31 0 0 0 .5 12 31 31 0 0 0 1 16.8a3 3 0 0 0 2.1 2.1c1.9.5 8.9.5 8.9.5s7 0 8.9-.5a3 3 0 0 0 2.1-2.1 31 31 0 0 0 .5-4.8 31 31 0 0 0-.5-4.8z"/><path fill="#fff" d="M9.8 15.1V8.9l5.4 3.1z"/></svg>
+        유튜브
+      </a>
+      <a href="https://www.instagram.com/invest_play_eat/" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><defs><linearGradient id="ig" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#FEC053"/><stop offset=".5" stop-color="#F2203E"/><stop offset="1" stop-color="#5258CF"/></linearGradient></defs><rect x="2" y="2" width="20" height="20" rx="6" fill="url(#ig)"/><circle cx="12" cy="12" r="4.3" fill="none" stroke="#fff" stroke-width="1.9"/><circle cx="17.3" cy="6.7" r="1.2" fill="#fff"/></svg>
+        인스타그램
+      </a>
+    </nav>
+  </header>
+
+  <!-- 인스타·카톡 안에서 열면 안내 (앱 설치는 Chrome·Safari에서) -->
+  <div class="inapp" id="inapp">지금 앱 안 브라우저로 보고 계세요. 기록표 앱을 <b>홈 화면에 추가</b>하려면 오른쪽 위 <b>⋯</b> → <b>외부 브라우저로 열기</b>(Chrome·Safari)를 눌러 주세요.</div>
+
+  <!-- ② 이번 영상 자료 (새 영상이 나오면 이 칸만 바꾸고, 지금 칸은 아래 '지난 자료'로 옮기기) -->
+  <div class="sec-title">이번 영상 자료 <span class="pin">📌 최신</span></div>
+  <article class="card">
+    <img class="thumb" src="img/story2_long.jpg" alt="실패 경험담 2편 썸네일: 자산 40억 만든 매매법, 배당주에 접목시켰더니">
+    <div class="body">
+      <h2>실패 경험담 2편 · 주식 개수 늘리기</h2>
+      <p class="sub">자산 40억까지 가장 큰 영향을 준 매매법. 아래 순서대로 보시면 돼요.</p>
+      <div class="steps">
+        <a class="step main" href="https://ipeinc.github.io/gaesu-log/guide.html">
+          <span class="num">1</span>
+          <span class="txt"><b>가이드 읽기</b><span>꼭 지킬 3가지 + 자세한 방법</span></span>
+          <span class="go">→</span>
+        </a>
+        <a class="step" href="https://ipeinc.github.io/gaesu-log/">
+          <span class="num">2</span>
+          <img class="ic" src="img/icon-log.png" alt="">
+          <span class="txt"><b>기록표 앱</b><span>한 줄 기록하면 개수 자동 계산</span></span>
+          <span class="go">→</span>
+        </a>
+        <a class="step" href="https://ipeinc.github.io/dividend-calc/">
+          <span class="num">3</span>
+          <img class="ic" src="img/icon-calc.png" alt="">
+          <span class="txt"><b>배당 은퇴 계산기</b><span>목표 배당까지 몇 년 걸릴까?</span></span>
+          <span class="go">→</span>
+        </a>
+      </div>
+      <div class="extra">
+        <span>무료 · 로그인 없이 바로 열려요</span>
+        <a href="https://drive.google.com/file/d/1GtfIOyTc2ITadR0-wYVcOCxg1ETe2isf/view?usp=sharing" target="_blank" rel="noopener">가이드 PDF로 받기</a>
+      </div>
+    </div>
+  </article>
+
+  <!-- ③ 지난 자료 (새 영상이 나오면 위 카드를 여기 .item 한 줄로 옮겨 쌓기) -->
+  <div class="sec-title">지난 영상 자료</div>
+  <div class="list">
+    <div class="soon">다음 편 자료도 여기에 차곡차곡 쌓여요</div>
+  </div>
+
+  <p class="foot">개인 경험을 정리한 자료이며 특정 종목의 매수·매도를 권유하지 않습니다.<br>투자 판단과 결과의 책임은 본인에게 있습니다.</p>
+</main>
+<script>
+/* 인스타·페이스북·카카오톡·네이버·라인 앱 안에서 열었을 때만 안내 띄우기 */
+(function(){try{var u=navigator.userAgent||'';if(/Instagram|FBAN|FBAV|KAKAOTALK|NAVER|Line\//i.test(u))document.getElementById('inapp').classList.add('on')}catch(e){}})();
+</script>
+</body>
+</html>
